@@ -1,0 +1,12 @@
+/* SearchText.css */
+
+.search-text-container {
+  border: 2px solid #ccc;
+  /* Add a border around the container */
+  padding: 20px;
+  /* Add padding for better spacing */
+  width: 80%;
+  /* Set width to 80% of the viewport width */
+  margin: 0 auto;
+  /* Center the container horizontally */
+}

@@ -1,7 +1,9 @@
+import SearchForText from "./Components/SearchForText";
+
 function App() {
   return (
     <div>
-      <button> </button>
+      <SearchForText/>
     </div>
   );
 }
