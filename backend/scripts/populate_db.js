@@ -18,51 +18,51 @@ mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
 
       // TODO: datapopulation here
       // run once using node
-      aeneid_books = [Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid I', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid II', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid III', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid IV', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid V', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid VI', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid VII', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid VIII', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid VIX', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid X', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid XI', text: '' }),
-                      Book.create({ title: 'LIBER PRIMVS', title_english: 'Aeneid XII', text: '' }),],
+      aeneid_books = [Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER PRIMVS', title_english: 'Aeneid I', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER SECVNDVS', title_english: 'Aeneid II', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER TERTIVS', title_english: 'Aeneid III', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER QVARTVS', title_english: 'Aeneid IV', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER QVINTVS', title_english: 'Aeneid V', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER SEXTVS', title_english: 'Aeneid VI', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER SEPTIMVS', title_english: 'Aeneid VII', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER OCTAVVS', title_english: 'Aeneid VIII', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER NONVS', title_english: 'Aeneid VIX', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER DECIMVS', title_english: 'Aeneid X', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER VNDECIMVS', title_english: 'Aeneid XI', text: '' }),
+                      Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER DVODECIMVS', title_english: 'Aeneid XII', text: '' }),],
 
       the_aeneid = Work.create({ title: 'Aeneis', 
                     english_title: 'The Aeneid',
                     code: 'A', 
                     text: 'TODO', 
-                    compositionDate: '30-19 BC', 
+                    compositionDate: '30-19 BCE', 
                     books: aeneid_books}),
       
       eclogues = Work.create({
         title: 'Eclogae',
         english_title: 'Eclogues',
         alt_title: 'Bucolics',
-        code: 'A',
+        code: 'Ecl',
         text: 'TODO',
-        composition_date: '30-19 BC',
-        books: aeneid_books
+        composition_date: '42-37 BCE', // https://www.britannica.com/topic/Eclogues-by-Virgil
+        books: 'TODO'
       }),
 
       georgics = Work.create({
-        title: 'P. VERGILI MARONIS AENEIDOS',
-        english_title: 'The Aeneid',
-        code: 'A',
+        title: 'Georgica',
+        english_title: 'Georgics',
+        code: 'G',
         text: 'TODO',
-        composition_date: '30-19 BC',
-        books: aeneid_books
+        composition_date: '37-30 BCE', // https://www.britannica.com/biography/Virgil#ref388807
+        books: 'TODO'
       }),
 
       Author.create({
         name: 'Publius Vergilius Maro',
         code: 'Verg',
         works: [the_aeneid, eclogues, georgics],
-        date_of_birth: '15 October, 70 BC',
-        date_of_death: '21 September, 19 BC'
+        date_of_birth: '15 October, 70 BCE',
+        date_of_death: '21 September, 19 BCE'
       }),
     ]);
   })
