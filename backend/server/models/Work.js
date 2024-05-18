@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const workSchema = new mongoose.Schema({
+const work_schema = new mongoose.Schema({
   title: {type: String, required: true},
   english_title: {type: String, index: true},
   alt_title: {type: String},
@@ -9,3 +9,6 @@ const workSchema = new mongoose.Schema({
   composition_date: {type: String},
   books: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Book' }]
 });
+
+const Work = mongoose.model('Work', work_schema);
+module.exports = Work;

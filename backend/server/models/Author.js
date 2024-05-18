@@ -7,3 +7,6 @@ const authorSchema = new mongoose.Schema({
   date_of_birth: { type: String },
   date_of_death: { type: String },
 });
+
+const Author = mongoose.model('Author', authorSchema);
+module.exports = Author;

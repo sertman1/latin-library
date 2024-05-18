@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 
-const sectionSchema = new mongoose.Schema({
+const section_schema = new mongoose.Schema({
   title: {type: String, required: true},
   text: {type: String, required: true}
 });
+
+const Section = mongoose.model('Section', section_schema);
+module.exports = Section;
