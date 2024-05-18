@@ -80,7 +80,7 @@ mongoose.connect(DB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
                       Book.create({ title: 'P. VERGILI MARONIS AENEIDOS LIBER DVODECIMVS', title_english: 'Aeneid XII', text: aeneid_books_text[12] }),],
 
       the_aeneid = Work.create({ title: 'Aeneis', 
-                    english_title: 'The Aeneid',
+                    english_title: 'Aeneid',
                     code: 'A', 
                     text: aeneid_books_text[0], 
                     compositionDate: '30-19 BCE', 
