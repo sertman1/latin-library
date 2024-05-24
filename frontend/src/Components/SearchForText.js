@@ -1,24 +1,42 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Button, Typography, TextField, Grid } from '@material-ui/core';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 import './Styling/SearchText.css'; // Import CSS file for styling
 
 const SearchForText = () => {
-  const [author, setAuthor] = useState('');
-  const [work, setWork] = useState('');
+  const [authors, setAuthors] = useState([]);
+  const [works, setWorks] = useState([]);
+  const [selectedAuthor, setSelectedAuthor] = useState(null);
+  const [selectedWork, setSelectedWork] = useState(null);
   const [searchResults, setSearchResults] = useState([]);
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleAuthorChange = (event) => {
-    setAuthor(event.target.value);
-  };
-
-  const handleWorkChange = (event) => {
-    setWork(event.target.value);
-  };
+  useEffect(() => {
+    const fetchAuthorsAndWorks = async () => {
+      try {
+        const authorsResponse = await fetch('/api/authors');
+        const worksResponse = await fetch('/api/works');
+        const authorsData = await authorsResponse.json();
+        const worksData = await worksResponse.json();
+        setAuthors(authorsData);
+        setWorks(worksData);
+      } catch (error) {
+        console.error('Error fetching authors and works:', error);
+      }
+    };
+    fetchAuthorsAndWorks();
+  }, []);
 
   const handleSearch = async () => {
+    if (!selectedAuthor || !selectedWork) {
+      setErrorMessage('Please select an author and a work.');
+      return;
+    }
     try {
-      const response = await fetch(`/api/search?author=${author}&work=${work}`);
+      const response = await fetch(`/api/search?author=${selectedAuthor}&work=${selectedWork}`);
       const data = await response.json();
       setSearchResults(data);
+      setErrorMessage('');
     } catch (error) {
       console.error('Error searching:', error);
     }
@@ -26,21 +44,36 @@ const SearchForText = () => {
 
   return (
     <div className="search-text-container"> {/* Apply CSS class for styling */}
-      <h2>Search Text</h2>
-      <div>
-        <label htmlFor="author">Search by Author:</label>
-        <input type="text" id="author" value={author} onChange={handleAuthorChange} />
-      </div>
-      <div>
-        <label htmlFor="work">Search by Work:</label>
-        <input type="text" id="work" value={work} onChange={handleWorkChange} />
-      </div>
-      <button onClick={handleSearch}>Search</button>
+      <Typography variant="h2">Search Text</Typography>
+      <Grid container spacing={2} alignItems="center">
+        <Grid item xs={6}>
+          <Autocomplete
+            options={authors}
+            getOptionLabel={(option) => option.name}
+            value={selectedAuthor}
+            onChange={(event, newValue) => setSelectedAuthor(newValue)}
+            renderInput={(params) => <TextField {...params} label="Search by Author" variant="outlined" />}
+          />
+        </Grid>
+        <Grid item xs={6}>
+          <Autocomplete
+            options={works}
+            getOptionLabel={(option) => option.title}
+            value={selectedWork}
+            onChange={(event, newValue) => setSelectedWork(newValue)}
+            renderInput={(params) => <TextField {...params} label="Search by Work" variant="outlined" />}
+          />
+        </Grid>
+        <Grid item xs={12}>
+          <Button variant="contained" color="primary" onClick={handleSearch}>Search</Button>
+          {errorMessage && <Typography className="error-message" color="error">{errorMessage}</Typography>}
+        </Grid>
+      </Grid>
       <div>
         {searchResults.map((result) => (
           <div key={result._id}>
-            <h3>{result.title}</h3>
-            <p>{result.text}</p>
+            <Typography variant="h3">{result.title}</Typography>
+            <Typography>{result.text}</Typography>
           </div>
         ))}
       </div>
