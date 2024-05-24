@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Author = require('../models/Author');
 
-router.get('/', async (req, res) => {
+router.get('/authors', async (req, res) => {
   try {
     const authors = await Author.find();
     res.json(authors);

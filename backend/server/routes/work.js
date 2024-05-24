@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Work = require('../models/Work');
 
-router.get('/', async (req, res) => {
+router.get('/works', async (req, res) => {
   try {
     const works = await Work.find();
     res.json(works);
