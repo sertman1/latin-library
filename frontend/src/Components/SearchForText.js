@@ -12,12 +12,14 @@ const SearchForText = () => {
   const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
+    const BASE_URL = 'http://localhost:5000';
     const fetchAuthorsAndWorks = async () => {
       try {
-        const authorsResponse = await fetch('/api/authors');
-        const worksResponse = await fetch('/api/works');
-        const authorsData = await authorsResponse.json();
-        const worksData = await worksResponse.json();
+        const authorsData = await fetch(`${BASE_URL}/authors`);
+        const worksData = await fetch(`${BASE_URL}/works`);
+
+        console.log(authorsData)
+
         setAuthors(authorsData);
         setWorks(worksData);
       } catch (error) {
