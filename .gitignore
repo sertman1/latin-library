@@ -26,3 +26,6 @@ yarn-error.log*
 /backend/.env
 
 /frontend/node_modules/.cache/
+/frontend/node_modules/.cache/*
+
+*.pack

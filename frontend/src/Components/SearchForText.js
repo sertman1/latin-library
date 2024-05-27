@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { Button, Typography, TextField, Grid } from '@material-ui/core';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import './Styling/SearchText.css'; // Import CSS file for styling
@@ -15,19 +16,17 @@ const SearchForText = () => {
     const BASE_URL = 'http://localhost:5000';
     const fetchAuthorsAndWorks = async () => {
       try {
-        const authorsData = await fetch(`${BASE_URL}/authors`);
-        const worksData = await fetch(`${BASE_URL}/works`);
+        const authorsResponse = await axios.get(`${BASE_URL}/api/authors/`);
+        const worksResponse = await axios.get(`${BASE_URL}/api/works/`);
 
-        console.log(authorsData)
-
-        setAuthors(authorsData);
-        setWorks(worksData);
+        setAuthors(authorsResponse.data);
+        setWorks(worksResponse.data);
       } catch (error) {
         console.error('Error fetching authors and works:', error);
       }
     };
     fetchAuthorsAndWorks();
-  }, []);
+  }, [authors, works]);
 
   const handleSearch = async () => {
     if (!selectedAuthor || !selectedWork) {
